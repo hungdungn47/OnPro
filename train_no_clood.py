@@ -164,8 +164,8 @@ class TrainLearnerNoCLOOD(object):
 
                     z = projections[:rot_x.shape[0]]
                     zt = projections[rot_x.shape[0]:]
-                    print('z data type: ', type(z))
-                    print('class per task data type: ', type((z[:x.shape[0]])))
+                    # print('z data type: ', type(z))
+                    # print('class per task data type: ', type((z[:x.shape[0]])))
                     proto_new_loss, cur_new_proto_z, cur_new_proto_zt = self.OPELoss(z[:x.shape[0]], zt[:x.shape[0]], y,
                                                                                      task_id, True)
 
