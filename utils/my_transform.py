@@ -96,7 +96,8 @@ class RandomResizedCropLayer(nn.Module):
         _theta[:, 1, 2] = whbias[:, 3]
 
         grid = F.affine_grid(_theta, inputs.size(), **kwargs).to(_device)
-        grid = torch.tensor(grid, dtype=inputs.dtype).to(_device)
+        # grid = torch.tensor(grid, dtype=inputs.dtype).to(_device)
+        grid = grid.clone().detach().type(inputs.dtype).to(_device)
         output = F.grid_sample(inputs, grid, padding_mode='reflection', **kwargs)
 
         if self.size is not None:
