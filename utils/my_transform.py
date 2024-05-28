@@ -290,7 +290,8 @@ class HorizontalFlipLayer(nn.Module):
         r_sign = torch.bernoulli(torch.ones(N, device=_device) * 0.5) * 2 - 1
         _theta[:, 0, 0] = r_sign
         grid = F.affine_grid(_theta, inputs.size(), **kwargs).to(_device)
-        grid = torch.tensor(grid, dtype=inputs.dtype).to(_device)
+        # grid = torch.tensor(grid, dtype=inputs.dtype).to(_device)
+        grid = grid.clone().detach().type(inputs.dtype).to(_device)
         inputs = F.grid_sample(inputs, grid, padding_mode='reflection', **kwargs)
 
         return inputs
