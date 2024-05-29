@@ -40,7 +40,7 @@ def get_cifar_data(dataset_name, batch_size, n_workers):
         task_num = 10
         class_num = 100
         data_dir = './data/binary_cifar100_10/'
-    class_per_task = class_num // task_num
+    class_per_task = [0, 2, 4, 6, 8, 10]
 
     if not os.path.isdir(data_dir):
         os.makedirs(data_dir)
@@ -65,7 +65,7 @@ def get_cifar_data(dataset_name, batch_size, n_workers):
                 data[task_id][data_type] = {'x': [], 'y': []}
                 for image, target in loader:
                     label = target.numpy()[0]
-                    if label in range(class_per_task * task_id, class_per_task * (task_id + 1)):
+                    if label in range(class_per_task[task_id], class_per_task[task_id + 1]):
                         data[task_id][data_type]['x'].append(image)
                         data[task_id][data_type]['y'].append(label)
 

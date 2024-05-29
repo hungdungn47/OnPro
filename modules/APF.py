@@ -66,8 +66,8 @@ class AdaptivePrototypicalFeedback(nn.Module):
 
     def make_mix_pair(self, sample_prob, prob_sample_num, nonZero_class, Zero_class, current_task_id):
         start_i = 0
-        # end_i = self.class_per_task[current_task_id + 1]
-        end_i = (current_task_id + 1) * self.class_per_task
+        end_i = self.class_per_task[current_task_id + 1]
+        # end_i = (current_task_id + 1) * self.class_per_task
         sample_num_per_class_pair = (sample_prob * prob_sample_num).round()
         diff_num = int((prob_sample_num - sample_num_per_class_pair.sum()).item())
         if diff_num > 0:

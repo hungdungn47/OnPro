@@ -629,8 +629,8 @@ class TrainLearner(object):
             for t in range(total_learned_task_id + 1):
                 features = self.model.forward_features(inputs)
 
-                out = self.model.forward_classifier(features, t)[:, :self.class_per_task]
-                # out = self.model.forward_classifier(features, t)[:, self.class_per_task[t]:self.class_per_task[t + 1]]
+                # out = self.model.forward_classifier(features, t)[:, :self.class_per_task]
+                out = self.model.forward_classifier(features, t)[:, self.class_per_task[t]:self.class_per_task[t + 1]]
 
                 out = F.softmax(out / self.args.T, dim=1)
 

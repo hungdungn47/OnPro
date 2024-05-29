@@ -13,8 +13,8 @@ class OPELoss(nn.Module):
     def cal_prototype(self, z1, z2, y, current_task_id):
         start_i = 0
         # print('Class per task data type:', type(self.class_per_task))
-        # end_i = self.class_per_task[current_task_id + 1]
-        end_i = (current_task_id + 1) * self.class_per_task
+        end_i = self.class_per_task[current_task_id + 1]
+        # end_i = (current_task_id + 1) * self.class_per_task
         dim = z1.shape[1]
         current_classes_mean_z1 = torch.zeros((end_i, dim), device=z1.device)
         current_classes_mean_z2 = torch.zeros((end_i, dim), device=z1.device)
