@@ -32,15 +32,17 @@ def get_data(dataset_name, batch_size, n_workers, args):
 def get_cifar_data(dataset_name, batch_size, n_workers):
     data = {}
     size = [3, 32, 32]
+    class_per_task = [0, 2, 4, 6, 8, 10]
     if dataset_name == "cifar10":
         task_num = 5
         class_num = 10
         data_dir = './data/binary_cifar_/'
+        class_per_task = [0, 2, 4, 6, 8, 10]
     elif dataset_name == "cifar100":
         task_num = 10
         class_num = 100
         data_dir = './data/binary_cifar100_10/'
-    class_per_task = [0, 2, 4, 6, 8, 10]
+        class_per_task = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
     if not os.path.isdir(data_dir):
         os.makedirs(data_dir)
